@@ -1,0 +1,74 @@
+APPROACH 1:
+#include<bits/stdc++.h>
+using namespace std;
+class Solution{
+  public:
+  void reversal(int arr[],int low,int high)
+    {
+    	while(low<high)
+    	{
+    		swap(arr[low],arr[high]);
+    		low++;
+    		high--;
+		}
+	}
+    void rotateArr(int arr[], int d, int n){
+        d=d%n; //if d is greater than n
+      reversal(arr,0,d-1);//reverse elements from 0 till d-1
+      reversal(arr,d,n-1);
+      reversal(arr,0,n-1);
+      }
+};
+
+APPROACH 2:class Solution{
+    public:
+    void rotateArr(int arr[], int d, int n){
+      int temp[d];
+      d=d%n;
+      
+      for(int i=0;i<d;i++)
+      {
+       temp[i]=arr[i];
+      }
+      
+      for(int i=d;i<n;i++)
+      {
+            arr[i-d]=arr[i]; 
+      }
+      
+      for(int i=0;i<d;i++)
+      {
+          arr[n-d+i]=temp[i];
+      }
+      
+    }
+};
+
+
+
+int main() {
+	int t;
+	//taking testcases
+	cin >> t;	
+	while(t--){
+	    int n, d;
+	    
+	    //input n and d
+	    cin >> n >> d;
+	    int arr[n];
+	    //inserting elements in the array
+	    for(int i = 0; i < n; i++){
+	        cin >> arr[i];
+	    }
+	    Solution ob;
+	    //calling rotateArr() function
+	    ob.rotateArr(arr, d,n);
+	    
+	    //printing the elements of the array
+	    for(int i =0;i<n;i++){
+	        cout << arr[i] << " ";
+	    }
+	    cout << endl;
+	}
+	return 0;
+}  // } Driver Code Ends
