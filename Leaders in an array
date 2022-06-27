@@ -1,0 +1,21 @@
+https://practice.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1#
+
+class Solution{
+    public:
+    vector<int> leaders(int a[], int n){ //16 17 
+    vector<int>v;
+    int temp=a[n-1]; //putting the rightmost element in the temporary variable
+    //pushing the rightmost element into vector
+    v.push_back(temp);
+    for(int i=n-2;i>=0;i--)
+    {
+        if(a[i]>=temp)
+        {
+            temp=a[i]; //updating the temporary variable
+            v.push_back(a[i]); //putting the greater element in vector
+        }
+    }
+    reverse(v.begin(),v.end()); //reversing the vector as we begin from the n-1th position
+    return v;
+    }
+};
