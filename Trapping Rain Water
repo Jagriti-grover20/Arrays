@@ -1,0 +1,34 @@
+//https://leetcode.com/problems/trapping-rain-water/
+class Solution {
+public:
+    int trap(vector<int>& height) {
+          long long res=0;
+        int n=height.size();
+   int left_most[n],right_most[n];
+ 
+    //putting 1st element of arr in leftmost array
+   left_most[0]=height[0]; //precomputing left max
+   for(int l=1;l<n;l++)
+   {//computing left max 
+   //comparing 2nd elem of arr with left max 1st elem.. 
+       left_most[l]=max(height[l],left_most[l-1]);
+   }
+   //precomputing right most element
+   //comparing last element with successive leftmost ele
+   right_most[n-1]=height[n-1];
+   for(int r=n-2;r>=0;r--){
+       
+       right_most[r]=max(height[r],right_most[r+1]);
+   }
+   //finding minimum of left and right max then
+   //subtracting the height of particular block to get
+   //the max water stored
+   for(int i=1;i<n-1;i++){
+        res=res+(min(left_most[i],right_most[i])-height[i]);
+   }
+        return res; 
+   }
+       
+    
+    
+};
