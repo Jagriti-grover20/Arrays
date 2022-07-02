@@ -1,0 +1,37 @@
+//https://leetcode.com/problems/contains-duplicate/
+//BRUTE FORCE APPROACH-> TLE
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        for(int i=0;i<nums.size();i++)
+        {
+            for(int j=i+1;j<nums.size();j++)
+            {
+                if(nums[i]==nums[j])
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
+
+//APPROACH 2
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+      //sort the entire array to gather all duplicates at one place
+        sort(nums.begin(),nums.end()) ;
+        for(int i=0 ; i < nums.size()-1 ; i++ )
+        {
+            if ( nums[i] == nums[i+1] ) //if consecutives are equal 
+            {
+                  return true; //yes, it contains duplicates
+            }
+        }
+ 
+             return false; //else array contains distinct elements      
+    }
+};
