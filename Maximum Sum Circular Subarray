@@ -1,0 +1,32 @@
+class Solution {
+public:
+    //Applying Kedan's algo to compute the subarray sum for both normal and circular subarray
+    int kedanalgo(vector<int>& nums) {
+//precomputing the res and maximum_sum by 1st element of array
+     int res=nums[0],maximum_sum=nums[0]; 
+        for(int i=1;i<nums.size();i++){
+//finding the sum of entire array and adding wih current element and comparing with current element            
+            maximum_sum=max(maximum_sum+nums[i],nums[i]);
+ //computing the result by comparing the maximum sum till now and prev res           
+            res=max(res,maximum_sum);
+        }
+        return res;
+    }
+    int maxSubarraySumCircular(vector<int>& nums) {
+        //for normal sum
+        int normal_sum=kedanalgo(nums);
+        if(normal_sum<0){
+            return normal_sum;
+        }
+        //for circular subarray sum
+        int sum=0;
+        for(int i=0;i<nums.size();i++){
+            sum+=nums[i];
+ //inverting each element of array to get minimum from original array 
+ //As minimum of orginal array will be maximum of circular array
+            nums[i]= -nums[i];
+        }
+        int circular_sum=sum+kedanalgo(nums);
+        return max(normal_sum,circular_sum);
+    }
+};
